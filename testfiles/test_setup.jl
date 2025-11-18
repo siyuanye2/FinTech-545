@@ -313,14 +313,14 @@ risk = select(aggRisk(values,[:Stock]),[:Stock, :VaR95, :ES95, :VaR95_Pct, :ES95
 CSV.write("data/testout9_1.csv",risk)
 
 #10.1 Risk Parity, normal assumption
-cin = CSV.read("data/test5_3.csv",DataFrame) |> Matrix
+cin = CSV.read("data/test5_2.csv",DataFrame) |> Matrix
 rpp,status = riskParity(cin)
 CSV.write("data/testout10_1.csv",DataFrame(:W=>rpp))
 
 #10.2 Risk Parity, normal assumption.  Half a risk share to X5
-cin = CSV.read("data/test5_3.csv",DataFrame) |> Matrix
+cin = CSV.read("data/test5_2.csv",DataFrame) |> Matrix
 rpp,status = riskParity(cin,riskBudget=[1,1,1,1,0.5])
-CSV.write("data/testout10_2.csv",DataFrame(:W=>rpp))
+CSV.write("../testfiles/data/testout10_2.csv",DataFrame(:W=>rpp))
 
 #10.3 Max Sharpe Ratio, normal assumption, w>0
 means = [i for i in 0.09:-0.01:0.05]
