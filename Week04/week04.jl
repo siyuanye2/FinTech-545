@@ -63,7 +63,7 @@ zscore = max_loss/sd
 ml_cdf = cdf(Normal(),zscore)
 println("Loss is $(round(zscore,digits=2))σ -->  CDF(loss)=$ml_cdf")
 
-universe_days = 14_000_000_000*365.25*24*60
+universe_days = 14_000_000_000*365.25
 p0 = (big"1.0"-convert(BigFloat,ml_cdf))^(universe_days)
 println("Probability of not seeing a $(round(zscore,digits=2))σ day for the life of the universe = $(100*p0)%")
 
@@ -197,7 +197,8 @@ println(" ")
 #MC VaR - Same Portfolio
 n = 10000
 #Simulate the returns.  Matrix is PD, so the internal simulation is probably faster
-sim_returns = rand(MvNormal(fill(0,3),Sigma),n)'
+r_model = MvNormal(fill(0,3),Sigma)
+sim_returns = rand(r_model,n)'
 
 sim_prices = (1 .+ sim_returns) .* Array(current_prices[nm])'
 vHoldings = [holdings[s] for s in nm]

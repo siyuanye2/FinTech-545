@@ -22,7 +22,6 @@ function VaR_ES(x,alpha=0.05)
     idn = convert(Int64,floor(n))
     VaR = (xs[iup] + xs[idn])/2
 
-
     ES = mean(xs[1:idn])
 
     return -VaR, -ES
